@@ -1,0 +1,96 @@
+信息系统与数据库技术练习15答题卡
+
+班级：   信管2班
+姓名：   聂沛文
+学号：   39
+
+注：请将答案放置在序号下方。*/
+
+（一）
+1.
+CREATE DATABASE Wares
+
+2.
+USE Wares
+
+3.
+CREATE TABLE Product
+(
+Pid CHAR(4) CONSTRAINT pk_Pid  PRIMARY KEY,
+Pname VARCHAR(40) NOT NULL,
+Specs VARCHAR(40) NOT NULL,
+Weight Decimal(16,2),
+Price MONEY,
+Code CHAR(15),
+Cid CHAR(4)
+)
+
+4.
+ALTER TABLE Product
+DROP CONSTRAINT pk_Pid
+
+5.
+ALTER TABLE Product
+ADD CONSTRAINT pk_Pid PRIMARY KEY(Pid)
+
+6.
+ALTER TABLE Product
+ADD CONSTRAINT ix_Code UNIQUE(Code)
+
+7.
+INSERT Product(Pid,Pname,Specs,Cid,Code)
+VALUES('PD02','商品2','EQ2080','CT01',202006011234567
+
+8.
+INSERT Product(Pid,Pname,Specs,Cid,Code)
+VALUES('PD03','商品3','EQ2081','CT02',202006011234567)
+
+9.
+CREATE TABLE Category
+(
+Cid CHAR(4) CONSTRAINT pk_Cid PRIMARY KEY,
+Cname VARCHAR(40) NOT NULL CONSTRAINT ix_Pname UNIQUE,
+UpdateDate DATETIME
+)
+
+10.
+CREATE TABLE Warehouse
+(
+Wid CHAR(4) PRIMARY KEY,
+Wname VARCHAR(40) NOT NULL,
+Area Decimal(20,3) DEFAULT 1234.567,
+MaxStock Decimal(20,3)
+)
+
+11.
+INSERT Warehouse(Wid,Wname)
+VALUES('W001','五金')
+
+12.
+SELECT *
+FROM Warehouse
+
+13.
+ALTER TABLE Category
+ADD CONSTRAINT DF_updDate DEFAULT GETDATE() FOR UpdateDate
+
+14.
+INSERT Category(Cid,Cname)
+VALUES('CT01','钢板')
+
+15.
+ALTER TABLE Category
+ADD InitDate DateTime DEFAULT '2019-11-5' WITH VALUES
+
+16.
+SELECT *
+FROM Category
+
+17.
+CREATE TABLE CP
+(
+Cid CHAR(4),
+Pid CHAR(4),
+CONSTRAINT pk_CP PRIMARY KEY(Cid,Pid),
+Note Text
+)
